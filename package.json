@@ -6,20 +6,25 @@
   "type": "module",
   "bin": {
     "learn-ink": "./dist/index.js",
-    "ink-learn": "./dist/index.js"
+    "ink-learn": "./dist/index.js",
+    "ink-tutorial": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/index.js",
     "dev": "tsx src/index.tsx",
     "watch": "tsc --watch",
-    "learn": "tsx src/index.tsx"
+    "learn": "tsx src/index.tsx",
+    "clean": "rm -rf dist",
+    "rebuild": "npm run clean && npm run build",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [
     "ink",
     "yoga",
     "cli",
     "terminal",
+    "tui",
     "react",
     "typescript",
     "tutorial",
@@ -27,10 +32,26 @@
     "interactive",
     "education",
     "flexbox",
-    "layout"
+    "layout",
+    "command-line",
+    "ink-tutorial",
+    "terminal-ui",
+    "learn-react",
+    "learn-ink"
   ],
-  "author": "",
+  "author": {
+    "name": "Ink Learning Platform",
+    "url": "https://github.com/vadimdemedes/ink"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ink-yoga-learning-platform"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/ink-yoga-learning-platform/issues"
+  },
+  "homepage": "https://github.com/your-username/ink-yoga-learning-platform#readme",
   "dependencies": {
     "ink": "^5.0.1",
     "react": "^18.3.1",
