@@ -1,100 +1,95 @@
-# 📋 Ink + Yoga Cheat Sheet
+# 📋 Ink + Yoga Quick Reference Cheat Sheet
 
-Quick reference for all Ink and Yoga properties. Print this out or keep it handy!
+Your go-to reference for all Ink and Yoga properties.
 
 ---
 
 ## 🎨 Box Component Properties
 
 ### Layout Direction
+
 ```typescript
-flexDirection="row"        // Horizontal (→)
-flexDirection="column"     // Vertical (↓) [DEFAULT]
+flexDirection="row"     // Horizontal →
+flexDirection="column"  // Vertical ↓ (default)
 ```
 
 ### Main Axis Alignment (justifyContent)
+
 ```typescript
-justifyContent="flex-start"     // ╠══════    [DEFAULT]
-justifyContent="center"         //    ═══    
-justifyContent="flex-end"       //       ═══╣
-justifyContent="space-between"  // ═   ═   ═
-justifyContent="space-around"   //  ═  ═  ═ 
+justifyContent="flex-start"    // ◀────────────
+justifyContent="center"        // ────▶◀────
+justifyContent="flex-end"      // ────────────▶
+justifyContent="space-between" // ◀──────▶──────▶
+justifyContent="space-around"  // ──◀────▶────▶──
 ```
 
 ### Cross Axis Alignment (alignItems)
+
 ```typescript
-alignItems="flex-start"    // Align to start [DEFAULT]
-alignItems="center"        // Center alignment
-alignItems="flex-end"      // Align to end
-alignItems="stretch"       // Stretch to fill
+alignItems="flex-start"  // Align to start
+alignItems="center"      // Center align
+alignItems="flex-end"    // Align to end
+alignItems="stretch"     // Stretch to fill
 ```
 
 ### Flexible Sizing
+
 ```typescript
-flexGrow={0}      // Don't grow [DEFAULT]
-flexGrow={1}      // Grow to fill space
-flexGrow={2}      // Grow 2x relative to flexGrow={1}
+flexGrow={0}     // Don't grow (default)
+flexGrow={1}     // Grow proportionally
+flexGrow={2}     // Grow 2x compared to flexGrow={1}
 
-flexShrink={0}    // Don't shrink
-flexShrink={1}    // Can shrink [DEFAULT]
+flexShrink={0}   // Don't shrink
+flexShrink={1}   // Can shrink (default)
 
-flexBasis={20}    // Initial size before grow/shrink
-flexBasis="auto"  // Use content size [DEFAULT]
+flexBasis={20}   // Initial size before growing/shrinking
+flexBasis="auto" // Use content size (default)
 ```
 
 ### Spacing
+
 ```typescript
-// Padding (inside)
+// Padding (space inside)
 padding={1}           // All sides
-paddingX={1}          // Left + Right
-paddingY={1}          // Top + Bottom
+paddingX={2}          // Horizontal (left + right)
+paddingY={1}          // Vertical (top + bottom)
 paddingTop={1}
 paddingBottom={1}
-paddingLeft={1}
-paddingRight={1}
+paddingLeft={2}
+paddingRight={2}
 
-// Margin (outside)
+// Margin (space outside)
 margin={1}            // All sides
-marginX={1}           // Left + Right
-marginY={1}           // Top + Bottom
+marginX={2}           // Horizontal
+marginY={1}           // Vertical
 marginTop={1}
 marginBottom={1}
-marginLeft={1}
-marginRight={1}
+marginLeft={2}
+marginRight={2}
 ```
 
 ### Dimensions
+
 ```typescript
-width={50}            // Fixed width
-height={20}           // Fixed height
-minWidth={30}         // Minimum width
-maxWidth={100}        // Maximum width
-minHeight={10}        // Minimum height
-maxHeight={50}        // Maximum height
+width={50}        // Fixed width (characters)
+height={10}       // Fixed height (lines)
+minWidth={20}     // Minimum width
+minHeight={5}     // Minimum height
+maxWidth={100}    // Maximum width
+maxHeight={20}    // Maximum height
 ```
 
-### Display
+### Visual Style
+
 ```typescript
-display="flex"        // Show [DEFAULT]
-display="none"        // Hide
-```
+// Borders
+borderStyle="single"  // ┌─┐
+borderStyle="double"  // ╔═╗
+borderStyle="round"   // ╭─╮
+borderStyle="bold"    // ┏━┓
+borderStyle="classic" // +-+
 
----
-
-## 🎨 Visual Properties
-
-### Borders
-```typescript
-borderStyle="single"   // ┌─────┐
-borderStyle="double"   // ╔═════╗
-borderStyle="round"    // ╭─────╮
-borderStyle="bold"     // ┏━━━━━┓
-borderStyle="classic"  // +-----+
-```
-
-### Border Colors
-```typescript
-borderColor="black"
+// Border Colors
 borderColor="red"
 borderColor="green"
 borderColor="yellow"
@@ -103,45 +98,155 @@ borderColor="magenta"
 borderColor="cyan"
 borderColor="white"
 borderColor="gray"
+borderColor="black"
+
+// Display
+display="flex"  // Visible (default)
+display="none"  // Hidden
 ```
 
 ---
 
 ## 📝 Text Component Properties
 
-### Basic Usage
 ```typescript
-<Text>Normal text</Text>
-<Text color="cyan">Colored text</Text>
-<Text bold>Bold text</Text>
-<Text italic>Italic text</Text>
-<Text underline>Underlined text</Text>
-<Text strikethrough>Strikethrough text</Text>
-<Text dimColor>Dimmed text</Text>
+<Text
+  color="cyan"           // Text color
+  backgroundColor="blue" // Background color
+  bold                   // Bold text
+  italic                 // Italic text
+  underline              // Underlined text
+  strikethrough          // Strikethrough text
+  inverse                // Invert colors
+  dimColor               // Dimmed appearance
+  wrap="wrap"           // Text wrapping ("wrap", "truncate", "truncate-end")
+>
+  Content
+</Text>
 ```
 
-### Colors
-```typescript
-color="black"      backgroundColor="black"
-color="red"        backgroundColor="red"
-color="green"      backgroundColor="green"
-color="yellow"     backgroundColor="yellow"
-color="blue"       backgroundColor="blue"
-color="magenta"    backgroundColor="magenta"
-color="cyan"       backgroundColor="cyan"
-color="white"      backgroundColor="white"
-color="gray"       backgroundColor="gray"
+### Available Colors
+
+```
+black, red, green, yellow, blue, magenta, cyan, white, gray
 ```
 
 ---
 
-## 🎯 Common Patterns
+## 🎣 Ink Hooks
 
-### Center Everything
+### useInput
+
 ```typescript
-<Box 
+import { useInput } from 'ink';
+
+useInput((input, key) => {
+  // input: The character typed ('a', '1', etc.)
+  // key: Object with special keys
+  
+  if (input === 'q') {
+    // Handle 'q' key
+  }
+  
+  if (key.upArrow) {
+    // Handle up arrow
+  }
+  
+  if (key.return) {
+    // Handle enter/return
+  }
+  
+  if (key.escape) {
+    // Handle escape
+  }
+});
+```
+
+#### Key Object Properties
+
+```typescript
+key.upArrow      // ↑
+key.downArrow    // ↓
+key.leftArrow    // ←
+key.rightArrow   // →
+key.return       // Enter
+key.escape       // Esc
+key.ctrl         // Ctrl key held
+key.shift        // Shift key held
+key.tab          // Tab
+key.backspace    // Backspace
+key.delete       // Delete
+key.pageDown     // Page Down
+key.pageUp       // Page Up
+key.meta         // Meta/Command key
+```
+
+### useApp
+
+```typescript
+import { useApp } from 'ink';
+
+const { exit } = useApp();
+
+// Exit the application
+exit();
+
+// Exit with error
+exit(new Error('Something went wrong'));
+```
+
+### useStdout
+
+```typescript
+import { useStdout } from 'ink';
+
+const { stdout, write } = useStdout();
+
+// Get terminal dimensions
+const { columns, rows } = stdout;
+
+// Write directly to stdout
+write('Direct output');
+```
+
+### useStdin
+
+```typescript
+import { useStdin } from 'ink';
+
+const { stdin, isRawModeSupported, setRawMode } = useStdin();
+
+// Enable raw mode for custom input handling
+if (isRawModeSupported) {
+  setRawMode(true);
+}
+```
+
+### useFocus & useFocusManager
+
+```typescript
+import { useFocus, useFocusManager } from 'ink';
+
+// In a component
+const { isFocused } = useFocus();
+
+// Manage focus
+const { focus, focusNext, focusPrevious } = useFocusManager();
+focus('component-id');
+focusNext();
+focusPrevious();
+```
+
+---
+
+## 🎯 Common Patterns Cheat Sheet
+
+### Center Content
+
+```typescript
+<Box
   flexDirection="column"
-  justifyContent="center" 
+  justifyContent="center"
   alignItems="center"
   height={20}
 >
@@ -149,278 +254,304 @@ color="gray"       backgroundColor="gray"
 </Box>
 ```
 
-### Header/Content/Footer
+### Full-Width Header
+
 ```typescript
-<Box flexDirection="column" height="100%">
-  <Box flexGrow={0}>Header</Box>
-  <Box flexGrow={1}>Content</Box>
-  <Box flexGrow={0}>Footer</Box>
+<Box
+  borderStyle="double"
+  borderColor="cyan"
+  padding={1}
+>
+  <Box flexDirection="row" justifyContent="space-between">
+    <Text bold>App Name</Text>
+    <Text>Menu Items</Text>
+  </Box>
 </Box>
 ```
 
-### Sidebar + Main
-```typescript
-<Box flexDirection="row">
-  <Box width={20}>Sidebar</Box>
-  <Box flexGrow={1}>Main</Box>
-</Box>
-```
+### Sidebar + Content
 
-### Space Between Items
 ```typescript
-<Box flexDirection="row" justifyContent="space-between">
-  <Text>Left</Text>
-  <Text>Right</Text>
+<Box flexDirection="row" height="100%">
+  <Box width={20} borderStyle="single">
+    <Text>Sidebar</Text>
+  </Box>
+  <Box flexGrow={1}>
+    <Text>Main Content</Text>
+  </Box>
 </Box>
 ```
 
 ### Equal Columns
+
 ```typescript
 <Box flexDirection="row">
-  <Box flexGrow={1}>Col 1</Box>
-  <Box flexGrow={1}>Col 2</Box>
-  <Box flexGrow={1}>Col 3</Box>
+  <Box flexGrow={1} marginX={1}>Col 1</Box>
+  <Box flexGrow={1} marginX={1}>Col 2</Box>
+  <Box flexGrow={1} marginX={1}>Col 3</Box>
 </Box>
 ```
 
-### Card Layout
+### Proportional Columns
+
 ```typescript
-<Box 
-  borderStyle="round" 
-  borderColor="cyan"
-  padding={2}
-  marginX={1}
+<Box flexDirection="row">
+  <Box flexGrow={2}>Large (2x)</Box>
+  <Box flexGrow={1}>Small (1x)</Box>
+  <Box flexGrow={1}>Small (1x)</Box>
+</Box>
+```
+
+### Stacked Cards
+
+```typescript
+<Box flexDirection="column">
+  <Box borderStyle="round" padding={2} marginY={1}>
+    Card 1
+  </Box>
+  <Box borderStyle="round" padding={2} marginY={1}>
+    Card 2
+  </Box>
+</Box>
+```
+
+### Modal Dialog
+
+```typescript
+<Box
+  flexDirection="column"
+  justifyContent="center"
+  alignItems="center"
+  height="100%"
 >
-  <Text>Card Content</Text>
+  <Box
+    borderStyle="double"
+    borderColor="red"
+    padding={2}
+    minWidth={40}
+  >
+    <Text>Modal Content</Text>
+  </Box>
+</Box>
+```
+
+### Progress Bar
+
+```typescript
+<Box flexDirection="row" width={50}>
+  <Box flexGrow={3} backgroundColor="green">
+    <Text> </Text>
+  </Box>
+  <Box flexGrow={1} backgroundColor="gray">
+    <Text> </Text>
+  </Box>
+</Box>
+```
+
+### List with Selection
+
+```typescript
+{items.map((item, index) => (
+  <Box key={item.id}>
+    <Text color={index === selected ? 'cyan' : 'white'}>
+      {index === selected ? '▶ ' : '  '}
+      {item.title}
+    </Text>
+  </Box>
+))}
+```
+
+### Form Field
+
+```typescript
+<Box flexDirection="row" marginY={1}>
+  <Box width={15}>
+    <Text>Label:</Text>
+  </Box>
+  <Box flexGrow={1} borderStyle="single" paddingX={1}>
+    <Text>{value}</Text>
+  </Box>
 </Box>
 ```
 
 ---
 
-## 🪝 Essential Hooks
+## 🔧 Debugging Tips
 
-### useInput - Keyboard Input
+### Add Visible Borders
+
 ```typescript
-import { useInput } from 'ink';
-
-useInput((input, key) => {
-  // Regular keys
-  if (input === 'q') {
-    // User pressed 'q'
-  }
-  
-  // Special keys
-  if (key.upArrow) { }
-  if (key.downArrow) { }
-  if (key.leftArrow) { }
-  if (key.rightArrow) { }
-  if (key.return) { }      // Enter
-  if (key.escape) { }
-  if (key.tab) { }
-  if (key.backspace) { }
-  if (key.delete) { }
-});
-```
-
-### useApp - App Control
-```typescript
-import { useApp } from 'ink';
-
-const { exit } = useApp();
-
-// Exit the app
-exit();
-
-// Exit with error code
-exit(new Error('Something went wrong'));
-```
-
-### useState - State Management
-```typescript
-import { useState } from 'react';
-
-const [count, setCount] = useState(0);
-
-// Update state
-setCount(count + 1);
-setCount(prev => prev + 1);
-```
-
-### useEffect - Side Effects
-```typescript
-import { useEffect } from 'react';
-
-useEffect(() => {
-  // Run on mount
-  const timer = setInterval(() => {
-    // Do something
-  }, 1000);
-  
-  // Cleanup on unmount
-  return () => clearInterval(timer);
-}, []); // Empty deps = run once
-```
-
----
-
-## 🎮 Keyboard Input Reference
-
-### Special Keys Object
-```typescript
-key.upArrow       // ↑
-key.downArrow     // ↓
-key.leftArrow     // ←
-key.rightArrow    // →
-key.pageUp        // Page Up
-key.pageDown      // Page Down
-key.return        // Enter
-key.escape        // Esc
-key.ctrl          // Ctrl pressed
-key.shift         // Shift pressed
-key.tab           // Tab
-key.backspace     // Backspace
-key.delete        // Delete
-key.meta          // Cmd/Win key
-```
-
-### Input Examples
-```typescript
-useInput((input, key) => {
-  // Letter keys
-  if (input === 'a') { }
-  if (input === 'A') { } // Shift+A
-  
-  // Numbers
-  if (input === '1') { }
-  
-  // Symbols
-  if (input === '+') { }
-  if (input === ' ') { } // Space
-  
-  // Ctrl combinations
-  if (key.ctrl && input === 'c') {
-    // Ctrl+C
-  }
-});
-```
-
----
-
-## 🎨 Layout Decision Tree
-
-```
-START: Need to layout components?
-│
-├─ Which direction?
-│  ├─ Horizontal → flexDirection="row"
-│  └─ Vertical   → flexDirection="column" [default]
-│
-├─ How to space on MAIN axis?
-│  ├─ Start       → justifyContent="flex-start" [default]
-│  ├─ Center      → justifyContent="center"
-│  ├─ End         → justifyContent="flex-end"
-│  ├─ Spread      → justifyContent="space-between"
-│  └─ Distribute  → justifyContent="space-around"
-│
-├─ How to align on CROSS axis?
-│  ├─ Start   → alignItems="flex-start" [default]
-│  ├─ Center  → alignItems="center"
-│  ├─ End     → alignItems="flex-end"
-│  └─ Stretch → alignItems="stretch"
-│
-├─ Should it grow?
-│  ├─ No  → flexGrow={0} [default]
-│  └─ Yes → flexGrow={1} or higher
-│
-└─ Need spacing?
-   ├─ Inside  → padding={n}
-   └─ Outside → margin={n}
-```
-
----
-
-## 🐛 Debugging Tips
-
-### Add Borders to See Layout
-```typescript
-// Temporarily add borders to debug
+// Temporarily add borders to see layout boundaries
 <Box borderStyle="single" borderColor="red">
-  <Box borderStyle="single" borderColor="blue">
-    <Text>Content</Text>
+  <Text>Debug me</Text>
+</Box>
+```
+
+### Check Dimensions
+
+```typescript
+import { useStdout } from 'ink';
+
+const { stdout } = useStdout();
+console.log(`Terminal: ${stdout.columns}x${stdout.rows}`);
+```
+
+### Log Layout Properties
+
+```typescript
+<Box
+  onRender={(dimensions) => {
+    console.log('Box dimensions:', dimensions);
+  }}
+>
+  Content
+</Box>
+```
+
+---
+
+## ⚡ Performance Tips
+
+### Use React.memo
+
+```typescript
+import React from 'react';
+
+const MyComponent = React.memo(({ data }) => {
+  return <Box>{data}</Box>;
+});
+```
+
+### Avoid Inline Functions
+
+```typescript
+// Bad
+<Box onClick={() => doSomething()}>
+
+// Good
+const handleClick = () => doSomething();
+<Box onClick={handleClick}>
+```
+
+### Use Keys in Lists
+
+```typescript
+// Always provide keys
+{items.map(item => (
+  <Box key={item.id}>
+    {item.name}
   </Box>
-</Box>
-```
-
-### Check Parent Container
-```typescript
-// If flexGrow not working, check parent has size
-<Box width={100}> {/* Parent needs width! */}
-  <Box flexGrow={1}> {/* Now this works */}
-    Content
-  </Box>
-</Box>
-```
-
-### Verify flexDirection
-```typescript
-// Always know your direction!
-<Box flexDirection="row"> {/* Horizontal */}
-  {/* justifyContent = left/right */}
-  {/* alignItems = top/bottom */}
-</Box>
+))}
 ```
 
 ---
 
-## 📊 Flex Math
+## 📦 Useful Packages
 
-### flexGrow Distribution
+### Official Ink Components
 
-Total flexGrow = Sum of all children's flexGrow values
+```bash
+npm install ink-text-input      # Text input
+npm install ink-select-input    # Select menu
+npm install ink-spinner         # Loading spinner
+npm install ink-progress-bar    # Progress bar
+npm install ink-link            # Clickable links
+npm install ink-gradient        # Gradient text
+npm install ink-big-text        # Large ASCII text
+```
 
-Each child gets: `(childFlexGrow / totalFlexGrow) × availableSpace`
+### Community Packages
 
-**Example:**
-```typescript
-<Box width={100}>
-  <Box flexGrow={1}>  // Gets 1/4 = 25%
-  <Box flexGrow={2}>  // Gets 2/4 = 50%
-  <Box flexGrow={1}>  // Gets 1/4 = 25%
-</Box>
-
-Total flexGrow = 1 + 2 + 1 = 4
-Box 1: (1/4) × 100 = 25 chars
-Box 2: (2/4) × 100 = 50 chars
-Box 3: (1/4) × 100 = 25 chars
+```bash
+npm install ink-table           # Tables
+npm install ink-divider         # Dividers
+npm install ink-confirm-input   # Yes/No prompt
+npm install ink-multi-select    # Multi-select menu
+npm install pastel              # Ink framework
 ```
 
 ---
 
-## 🎓 Quick Tips
+## 🎓 Learning Path
 
-1. **Always set flexDirection first** - it determines your axes
-2. **Use flexGrow for responsive layouts** - adapts to terminal size
-3. **Padding before margin** - internal space, then external
-4. **Center with both properties** - justifyContent + alignItems
-5. **Add borders when debugging** - makes layout visible
-6. **Extract common patterns** - DRY your components
-7. **Test different terminal sizes** - layouts should adapt
+1. ✅ Understand Box and Text components
+2. ✅ Master flexDirection
+3. ✅ Learn justifyContent and alignItems
+4. ✅ Practice with padding and margin
+5. ✅ Use flexGrow for responsive layouts
+6. ✅ Study real-world patterns
+7. ✅ Build your own CLI app
+8. ✅ Add interactivity with useInput
+9. ✅ Handle state with React hooks
+10. ✅ Publish to npm!
 
 ---
 
-## 📚 Resources
+## 💡 Quick Problem Solvers
+
+**Content not centering?**
+→ Add `height` and use both `justifyContent="center"` and `alignItems="center"`
+
+**Text overflowing?**
+→ Use `maxWidth` instead of `width`, or set `wrap="wrap"` on Text
+
+**flexGrow not working?**
+→ Parent container needs a defined size
+
+**Spacing looks wrong?**
+→ Check if you meant `padding` (inside) or `margin` (outside)
+
+**Layout breaking on resize?**
+→ Use `flexGrow` instead of fixed widths
+
+**Colors not showing?**
+→ Check terminal color support with `chalk.supportsColor`
+
+---
+
+## 🚀 Quick Start Template
+
+```typescript
+#!/usr/bin/env node
+import React, { useState } from 'react';
+import { render, Box, Text, useInput, useApp } from 'ink';
+
+const App = () => {
+  const { exit } = useApp();
+  const [count, setCount] = useState(0);
+
+  useInput((input) => {
+    if (input === 'q') exit();
+    if (input === '+') setCount(c => c + 1);
+    if (input === '-') setCount(c => c - 1);
+  });
+
+  return (
+    <Box flexDirection="column" padding={1}>
+      <Box borderStyle="round" padding={1}>
+        <Text>Count: {count}</Text>
+      </Box>
+      <Box marginTop={1}>
+        <Text dimColor>
+          Press + or - to change, q to quit
+        </Text>
+      </Box>
+    </Box>
+  );
+};
+
+render(<App />);
+```
+
+---
+
+## 📚 Additional Resources
 
 - **Ink Docs:** https://github.com/vadimdemedes/ink
-- **Yoga Playground:** https://yogalayout.com/playground
-- **CSS Flexbox Guide:** https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-- **React Hooks:** https://react.dev/reference/react
+- **Yoga Docs:** https://yogalayout.com/docs
+- **Flexbox Guide:** https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+- **React Docs:** https://react.dev
 
 ---
 
-## 💡 Remember
-
-> "Yoga calculates, you just describe!"
-
-Instead of calculating exact positions, describe your intent with flexbox properties and let Yoga do the heavy lifting.
-
-Happy building! 🚀
+**💾 Save this file for quick reference while coding!**
