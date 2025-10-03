@@ -1,447 +1,405 @@
-# 📖 Glossary of Terms
+# 📖 Ink + Yoga Glossary
 
-A comprehensive reference of all terms used in Ink and Yoga development.
-
----
-
-## A
-
-### alignItems
-A flexbox property that controls how children are aligned along the **cross axis**. Values include `flex-start`, `center`, `flex-end`, and `stretch`.
-
-**Example:**
-```typescript
-<Box flexDirection="row" alignItems="center">
-  {/* Items centered vertically */}
-</Box>
-```
-
-### ANSI Escape Codes
-Special character sequences that control text formatting, colors, and cursor positioning in terminals. Ink uses these internally to render UI.
-
-**Example:** `\x1b[31m` makes text red
+Complete definitions of all terms, concepts, and components.
 
 ---
 
-## B
-
-### Box
-The fundamental layout component in Ink. Similar to `<div>` in HTML. Every Box is a flexbox container managed by Yoga.
-
-**Properties:** flexDirection, justifyContent, alignItems, padding, margin, width, height, etc.
-
-### borderColor
-Property that sets the color of a Box's border. Works with `borderStyle`.
-
-**Values:** `red`, `green`, `blue`, `yellow`, `cyan`, `magenta`, `white`, `gray`
-
-### borderStyle
-Property that defines the visual style of a Box's border.
-
-**Values:** `single`, `double`, `round`, `bold`, `classic`
-
----
-
-## C
-
-### CLI (Command-Line Interface)
-A text-based user interface for interacting with programs. Ink helps you build beautiful CLIs using React.
-
-### Component
-A reusable piece of UI in React. Can be a function or class that returns JSX.
-
-**Example:**
-```typescript
-const Header = () => (
-  <Box><Text bold>My Header</Text></Box>
-);
-```
-
-### Cross Axis
-The axis perpendicular to the main axis in flexbox. Controlled by `alignItems`.
-
-- If `flexDirection="row"`, cross axis is vertical (↓)
-- If `flexDirection="column"`, cross axis is horizontal (→)
-
----
-
-## D
-
-### dimColor
-A Text property that displays text with reduced brightness, useful for secondary information.
-
-**Example:**
-```typescript
-<Text dimColor>Last updated: 2 hours ago</Text>
-```
-
----
-
-## E
-
-### exit()
-Function from `useApp()` hook that terminates the Ink application.
-
-**Example:**
-```typescript
-const { exit } = useApp();
-exit(); // Quits the app
-```
-
----
-
-## F
-
-### flexBasis
-The initial size of a flex item before flexGrow/flexShrink are applied. Think of it as a "preferred size."
-
-**Example:**
-```typescript
-<Box flexBasis={20} flexGrow={1}>
-  {/* Starts at 20 chars, then grows */}
-</Box>
-```
-
-### flexbox
-A CSS layout system for arranging items in rows or columns with flexible sizing. Implemented by Yoga for terminal UIs.
-
-### flexDirection
-The primary flexbox property that determines the direction children are laid out.
-
-**Values:**
-- `row` - Horizontal layout (→)
-- `column` - Vertical layout (↓)
-
-### flexGrow
-A number that determines how much a flex item should grow relative to siblings when extra space is available.
-
-**Example:**
-```typescript
-<Box flexGrow={1}> {/* Takes 1 part of space */}
-<Box flexGrow={2}> {/* Takes 2 parts of space */}
-```
-
-### flexShrink
-A number that determines how much a flex item should shrink when space is limited. Default is 1. Set to 0 to prevent shrinking.
-
-**Example:**
-```typescript
-<Box flexShrink={0} width={20}>
-  {/* Won't shrink below 20 */}
-</Box>
-```
-
----
-
-## H
-
-### height
-Property that sets a fixed height for a Box (in terminal lines/rows).
-
-**Example:**
-```typescript
-<Box height={10}> {/* 10 lines tall */}
-```
-
-### Hook
-A React function that lets you use state and other features in functional components. Ink provides special hooks like `useInput` and `useApp`.
-
----
-
-## I
+## Core Concepts
 
 ### Ink
-A React renderer for building CLI applications. Renders React components to the terminal instead of the browser.
-
-**Created by:** Vadim Demedes
-
-### input
-Parameter in `useInput` hook representing the character typed by the user.
-
-**Example:**
-```typescript
-useInput((input, key) => {
-  if (input === 'q') {
-    // User pressed 'q'
-  }
-});
-```
-
-### inverse
-Text property that swaps foreground and background colors, creating a highlight effect.
-
-**Example:**
-```typescript
-<Text inverse> Selected Item </Text>
-```
-
----
-
-## J
-
-### JSX
-JavaScript XML - syntax extension that lets you write HTML-like code in JavaScript. Used by React and Ink.
-
-**Example:**
-```typescript
-const element = <Box><Text>Hello</Text></Box>;
-```
-
-### justifyContent
-Flexbox property that controls spacing along the **main axis**.
-
-**Values:**
-- `flex-start` - Pack at start
-- `center` - Pack in center
-- `flex-end` - Pack at end
-- `space-between` - Distribute with space between
-- `space-around` - Distribute with space around
-
----
-
-## K
-
-### key
-Parameter in `useInput` hook containing information about special keys pressed.
-
-**Properties:**
-```typescript
-key.upArrow
-key.downArrow
-key.leftArrow
-key.rightArrow
-key.return
-key.escape
-key.ctrl
-key.shift
-key.meta
-```
-
----
-
-## M
-
-### Main Axis
-The primary axis along which flex items are laid out. Determined by `flexDirection`.
-
-- If `flexDirection="row"`, main axis is horizontal (→)
-- If `flexDirection="column"`, main axis is vertical (↓)
-
-### margin
-Property that creates space **outside** a component, pushing other components away.
-
-**Example:**
-```typescript
-<Box margin={2}>        {/* All sides */}
-<Box marginX={2}>       {/* Horizontal */}
-<Box marginY={1}>       {/* Vertical */}
-<Box marginTop={1}>     {/* Individual sides */}
-```
-
-### maxHeight
-Maximum height constraint for a Box. Content can be smaller but not larger.
-
-### maxWidth
-Maximum width constraint for a Box. Content can be smaller but not larger.
-
-### minHeight
-Minimum height constraint for a Box. Content must be at least this tall.
-
-### minWidth
-Minimum width constraint for a Box. Content must be at least this wide.
-
----
-
-## N
-
-### Newline
-Ink component that creates a line break, similar to `<br>` in HTML.
-
-**Example:**
-```typescript
-<Text>
-  Line 1
-  <Newline />
-  Line 2
-</Text>
-```
-
-### Node
-JavaScript runtime built on Chrome's V8 engine. Required to run Ink applications.
-
----
-
-## P
-
-### padding
-Property that creates space **inside** a component, between the border and content.
-
-**Example:**
-```typescript
-<Box padding={2}>       {/* All sides */}
-<Box paddingX={2}>      {/* Horizontal */}
-<Box paddingY={1}>      {/* Vertical */}
-<Box paddingTop={1}>    {/* Individual sides */}
-```
-
-### Props
-Properties passed to React components. Similar to function parameters.
-
-**Example:**
-```typescript
-const Greeting = ({ name }) => (
-  <Text>Hello {name}!</Text>
-);
-
-<Greeting name="World" />
-```
-
----
-
-## R
-
-### React
-JavaScript library for building user interfaces using components. Ink uses React to build terminal UIs.
-
-### render()
-Ink function that renders a React component tree to the terminal.
-
-**Example:**
-```typescript
-import { render } from 'ink';
-render(<App />);
-```
-
-### REPL (Read-Eval-Print Loop)
-Interactive programming environment. Ink apps are not traditional REPLs but interactive CLI applications.
-
----
-
-## S
-
-### State
-Data that changes over time in a React component. Managed with `useState` hook.
-
-**Example:**
-```typescript
-const [count, setCount] = useState(0);
-```
-
-### stdin (Standard Input)
-Input stream for reading user input. Accessed via `useStdin` hook.
-
-### stdout (Standard Output)
-Output stream for writing to the terminal. Accessed via `useStdout` hook.
-
-**Example:**
-```typescript
-const { stdout } = useStdout();
-console.log(stdout.columns); // Terminal width
-```
-
----
-
-## T
-
-### Terminal
-Text-based interface for interacting with computers. Also called command line, console, or shell.
-
-### Text
-Ink component for displaying text content. Similar to `<span>` in HTML.
-
-**Properties:**
-```typescript
-<Text
-  color="cyan"
-  backgroundColor="blue"
-  bold
-  italic
-  underline
-  strikethrough
-  dimColor
-  inverse
->
-```
-
-### TypeScript
-Typed superset of JavaScript that compiles to plain JavaScript. Provides type safety and better IDE support.
-
----
-
-## U
-
-### useApp
-Ink hook that provides app lifecycle methods.
-
-**Returns:** `{ exit }` - function to quit the app
-
-### useInput
-Ink hook that captures keyboard input in real-time.
-
-**Signature:**
-```typescript
-useInput((input: string, key: Key) => void)
-```
-
-### useStdin
-Ink hook that provides access to stdin (standard input).
-
-**Returns:** `{ stdin, setRawMode }`
-
-### useStdout
-Ink hook that provides access to stdout (standard output) and terminal dimensions.
-
-**Returns:** `{ stdout, write }`
-
----
-
-## W
-
-### width
-Property that sets a fixed width for a Box (in terminal characters/columns).
-
-**Example:**
-```typescript
-<Box width={50}> {/* 50 characters wide */}
-```
-
----
-
-## Y
+**Definition:** A React renderer for building command-line interface applications.  
+**What it does:** Converts React components into terminal output using ANSI escape codes.  
+**Analogy:** Like ReactDOM for browsers, but for terminals.  
+**Example:** `render(<App />)` displays your React components in the terminal.
 
 ### Yoga
-Cross-platform layout engine that implements CSS Flexbox. Used by Ink, React Native, and other frameworks to calculate layouts.
+**Definition:** A cross-platform layout engine that implements CSS Flexbox.  
+**What it does:** Calculates the position and size of every element based on flexbox rules.  
+**Used by:** React Native, Ink, and other frameworks.  
+**Why it matters:** Makes terminal layouts as easy as web layouts.
 
-**Created by:** Meta (Facebook)
+### ANSI Escape Codes
+**Definition:** Special character sequences that control terminal formatting.  
+**What they do:** Move cursor, change colors, clear screen, etc.  
+**Example:** `\x1b[31m` makes text red.  
+**Ink's role:** You don't write these directly; Ink generates them for you.
 
-**Core Algorithm:**
-1. Measure - Calculate element sizes
-2. Layout - Position elements using flexbox rules
-3. Update - Recalculate when things change
+### Terminal / CLI
+**Terminal:** The application window that runs command-line programs.  
+**CLI (Command-Line Interface):** A text-based user interface.  
+**Examples:** Terminal.app (Mac), Command Prompt (Windows), GNOME Terminal (Linux).
 
----
-
-## Common Abbreviations
-
-- **CLI** - Command-Line Interface
-- **JSX** - JavaScript XML
-- **ANSI** - American National Standards Institute
-- **REPL** - Read-Eval-Print Loop
-- **stdin** - Standard Input
-- **stdout** - Standard Output
-- **stderr** - Standard Error
-- **UI** - User Interface
-- **UX** - User Experience
+### TUI (Text User Interface)
+**Definition:** A visual interface built with text characters in the terminal.  
+**Difference from CLI:** TUI is visual and interactive (like Ink apps), CLI is typically line-by-line commands.  
+**Examples:** htop, vim, midnight commander.
 
 ---
 
-## See Also
+## Components
 
-- **TUTORIAL.md** - Comprehensive tutorial
-- **CHEATSHEET.md** - Quick reference
-- **README.md** - Getting started guide
-- **LAYOUT_GUIDE.md** - Deep dive into Yoga layouts
+### Box
+**Type:** Component  
+**Purpose:** Primary layout container, like `<div>` in HTML.  
+**Key Properties:** flexDirection, justifyContent, alignItems, padding, margin, width, height  
+**Default Behavior:** Invisible container with flexDirection="column"  
+**Example:**
+```typescript
+<Box flexDirection="row" padding={2}>
+  <Text>Content</Text>
+</Box>
+```
+
+### Text
+**Type:** Component  
+**Purpose:** Display text content, like `<span>` in HTML.  
+**Key Properties:** color, backgroundColor, bold, italic, dimColor  
+**Cannot Contain:** Box components (only strings and other Text components)  
+**Example:**
+```typescript
+<Text color="cyan" bold>Hello</Text>
+```
+
+### Newline
+**Type:** Component  
+**Purpose:** Insert line breaks.  
+**Usage:** `<Newline />` or `<Newline count={3} />`  
+**Alternative:** Use `\n` in Text content  
+**Example:**
+```typescript
+<Text>Line 1<Newline />Line 2</Text>
+```
+
+### Spacer
+**Type:** Component  
+**Purpose:** Flexible space that grows to fill available space.  
+**Usage:** `<Spacer />`  
+**Common Use:** Pushing elements to opposite ends  
+**Example:**
+```typescript
+<Box flexDirection="row">
+  <Text>Left</Text>
+  <Spacer />
+  <Text>Right</Text>
+</Box>
+```
 
 ---
 
-**Use this glossary when you encounter unfamiliar terms!** 📖
+## Layout Properties
+
+### flexDirection
+**Type:** Property  
+**Values:** "row" | "column"  
+**Default:** "column"  
+**What it controls:** Direction children are arranged  
+**row:** Horizontal (left to right) →  
+**column:** Vertical (top to bottom) ↓
+
+### justifyContent
+**Type:** Property  
+**Values:** "flex-start" | "center" | "flex-end" | "space-between" | "space-around"  
+**Default:** "flex-start"  
+**What it controls:** Alignment along the main axis  
+**Main axis:** Direction of flexDirection  
+**Example:** In a row, controls left-to-right positioning
+
+### alignItems
+**Type:** Property  
+**Values:** "flex-start" | "center" | "flex-end" | "stretch"  
+**Default:** "flex-start"  
+**What it controls:** Alignment along the cross axis  
+**Cross axis:** Perpendicular to flexDirection  
+**Example:** In a row, controls top-to-bottom positioning
+
+### flexGrow
+**Type:** Property  
+**Values:** number (typically 0-3)  
+**Default:** 0 (don't grow)  
+**What it controls:** How much item grows to fill space  
+**Relative:** Values are relative to siblings  
+**Example:** flexGrow={2} takes twice as much space as flexGrow={1}
+
+### flexShrink
+**Type:** Property  
+**Values:** number  
+**Default:** 1 (can shrink)  
+**What it controls:** How much item shrinks when space is limited  
+**Example:** flexShrink={0} prevents shrinking (stays at original size)
+
+### flexBasis
+**Type:** Property  
+**Values:** number | "auto"  
+**Default:** "auto"  
+**What it controls:** Initial size before growing/shrinking  
+**Example:** flexBasis={20} starts at 20 characters, then grows if flexGrow is set
+
+### padding
+**Type:** Property  
+**Values:** number  
+**What it is:** Space INSIDE the component, between border and content  
+**Directional:** paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY  
+**Visual:** Pushes content away from borders
+
+### margin
+**Type:** Property  
+**Values:** number  
+**What it is:** Space OUTSIDE the component, between it and other components  
+**Directional:** marginTop, marginBottom, marginLeft, marginRight, marginX, marginY  
+**Visual:** Pushes other components away
+
+### width / height
+**Type:** Property  
+**Values:** number | string  
+**What they do:** Set fixed dimensions  
+**Units:** Characters (width) and lines (height)  
+**Percentage:** Use string like "50%" for percentage-based sizing
+
+### minWidth / minHeight / maxWidth / maxHeight
+**Type:** Property  
+**Values:** number  
+**What they do:** Set size constraints  
+**Usage:** Responsive layouts that adapt but have limits
+
+---
+
+## Visual Properties
+
+### borderStyle
+**Type:** Property  
+**Values:** "single" | "double" | "round" | "bold" | "classic" | undefined  
+**What it does:** Adds a border around the Box  
+**Examples:**
+- single: ┌─┐
+- double: ╔═╗
+- round: ╭─╮
+- bold: ┏━┓
+
+### borderColor
+**Type:** Property  
+**Values:** "red" | "green" | "yellow" | "blue" | "magenta" | "cyan" | "white" | "gray" | "black"  
+**What it does:** Sets the color of the border  
+**Requires:** borderStyle must be set
+
+### color
+**Type:** Property (Text component)  
+**Values:** Color names (same as borderColor)  
+**What it does:** Sets text foreground color
+
+### backgroundColor
+**Type:** Property  
+**Values:** Color names  
+**What it does:** Sets background color  
+**Usage:** Useful for highlighting or creating filled areas
+
+---
+
+## Hooks
+
+### useInput
+**Type:** Hook  
+**Purpose:** Capture keyboard input  
+**Returns:** Nothing (uses callback)  
+**Signature:** `useInput((input: string, key: Key) => void)`  
+**input:** The character pressed ('a', '1', etc.)  
+**key:** Object with special keys (arrows, enter, escape)
+
+### useApp
+**Type:** Hook  
+**Purpose:** Access application lifecycle methods  
+**Returns:** `{ exit: () => void }`  
+**Usage:** Call `exit()` to quit the application
+
+### useStdout
+**Type:** Hook  
+**Purpose:** Access stdout and terminal info  
+**Returns:** `{ stdout, write }`  
+**stdout:** Has properties like columns (width) and rows (height)
+
+### useStdin
+**Type:** Hook  
+**Purpose:** Access stdin and control input mode  
+**Returns:** `{ stdin, isRawModeSupported, setRawMode }`  
+**Raw mode:** Character-by-character input vs line-by-line
+
+### useFocus
+**Type:** Hook  
+**Purpose:** Manage focus for interactive components  
+**Returns:** `{ isFocused: boolean }`  
+**Usage:** Know if component currently has focus
+
+### useFocusManager
+**Type:** Hook  
+**Purpose:** Control focus programmatically  
+**Returns:** `{ focus, focusNext, focusPrevious }`  
+**Usage:** Navigate between focusable components
+
+---
+
+## Concepts
+
+### Main Axis
+**Definition:** The axis along which flex items are laid out  
+**Direction:** Determined by flexDirection  
+**row:** Horizontal (left to right)  
+**column:** Vertical (top to bottom)  
+**Controlled by:** justifyContent
+
+### Cross Axis
+**Definition:** The axis perpendicular to the main axis  
+**Direction:** Opposite of main axis  
+**row:** Vertical (top to bottom)  
+**column:** Horizontal (left to right)  
+**Controlled by:** alignItems
+
+### Flexbox
+**Definition:** A CSS layout module for arranging items in one dimension  
+**One dimension:** Either row OR column (not both at once like grid)  
+**Features:** Flexible sizing, alignment, distribution  
+**Yoga's role:** Implements flexbox for Ink
+
+### Box Model
+**Definition:** The structure of spacing around elements  
+**Order (inside to out):** Content → Padding → Border → Margin  
+**Content:** Your Text or child Boxes  
+**Padding:** Space inside border  
+**Border:** Visual boundary  
+**Margin:** Space outside border
+
+### Render
+**Definition:** The process of converting React components to terminal output  
+**Initial render:** First display of the app  
+**Re-render:** Update when state changes  
+**Efficient:** React only updates what changed
+
+### State
+**Definition:** Data that can change over time  
+**Hook:** `useState(initialValue)`  
+**Returns:** `[value, setValue]`  
+**Triggers:** Changing state causes re-render
+
+### Props
+**Definition:** Properties passed from parent to child component  
+**Purpose:** Configure and customize components  
+**Read-only:** Component cannot modify its own props  
+**Type-safe:** Define with TypeScript interfaces
+
+### Component
+**Definition:** A reusable piece of UI  
+**Function component:** JavaScript function that returns JSX  
+**Props:** Accepts props as parameter  
+**State:** Can use hooks for local state
+
+### JSX
+**Definition:** JavaScript syntax extension that looks like HTML  
+**What it is:** `<Box><Text>Hi</Text></Box>`  
+**Compiles to:** `React.createElement(Box, null, React.createElement(Text, null, "Hi"))`  
+**Why use it:** More readable than createElement calls
+
+---
+
+## Terminal Concepts
+
+### Character Width
+**Definition:** Horizontal space in terminal measured in characters  
+**Standard:** Monospace font means each character is same width  
+**Usage:** width={50} = 50 characters wide
+
+### Line Height
+**Definition:** Vertical space in terminal measured in lines  
+**Usage:** height={10} = 10 lines tall
+
+### Cursor
+**Definition:** Blinking indicator showing current position  
+**Ink's handling:** Ink manages cursor automatically  
+**Raw mode:** Full control over cursor position
+
+### Terminal Dimensions
+**Columns:** Width of terminal in characters  
+**Rows:** Height of terminal in lines  
+**Access:** `const { stdout } = useStdout(); stdout.columns`  
+**Responsive:** Can change when user resizes terminal
+
+### Color Support
+**Definition:** Terminal's ability to display colors  
+**Levels:** No color, 16 colors, 256 colors, true color  
+**Check:** `chalk.supportsColor`  
+**Fallback:** Ink handles gracefully if colors not supported
+
+---
+
+## Common Patterns
+
+### Centering
+**Horizontal:** alignItems="center" (when column) or justifyContent="center" (when row)  
+**Vertical:** justifyContent="center" (when column) or alignItems="center" (when row)  
+**Both:** Use both properties with appropriate flexDirection
+
+### Sidebar
+**Pattern:** Fixed-width sidebar + flexible main content  
+**Implementation:** width={20} on sidebar, flexGrow={1} on main content
+
+### Header/Footer
+**Pattern:** Fixed header/footer + flexible main content  
+**Implementation:** flexGrow={0} on header/footer, flexGrow={1} on main
+
+### Grid
+**Pattern:** Equal-width columns  
+**Implementation:** Each child has flexGrow={1} with marginX for spacing
+
+### Modal
+**Pattern:** Centered overlay  
+**Implementation:** Outer container with justifyContent="center" and alignItems="center"
+
+---
+
+## Best Practices
+
+### Semantic Component Names
+**Good:** `<Sidebar>`, `<Header>`, `<Card>`  
+**Bad:** `<Box1>`, `<Container>`, `<Div>`
+
+### Extract Repeated Layouts
+**Principle:** DRY (Don't Repeat Yourself)  
+**Method:** Create reusable components for common patterns
+
+### Use TypeScript
+**Benefits:** Catch errors early, better autocomplete, self-documenting code  
+**Interfaces:** Define prop types for components
+
+### Optimize Re-renders
+**Methods:** React.memo, useMemo, useCallback  
+**When:** For expensive calculations or large lists
+
+---
+
+## Troubleshooting Terms
+
+### Overflow
+**Problem:** Content extends beyond container  
+**Solution:** Use maxWidth, check parent dimensions
+
+### Layout Shift
+**Problem:** Elements jumping around on updates  
+**Solution:** Use fixed dimensions or consistent flexGrow values
+
+### Flicker
+**Problem:** UI flashing on updates  
+**Solution:** Optimize re-renders, batch state updates
+
+### Z-Index
+**Note:** Not available in Ink  
+**Alternative:** Use rendering order (last rendered appears "on top")
+
+---
+
+## Resources
+
+- **Ink Repo:** github.com/vadimdemedes/ink
+- **Yoga Docs:** yogalayout.com/docs
+- **React Docs:** react.dev
+- **Flexbox Guide:** css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+---
+
+**💡 Pro Tip:** Bookmark this glossary and refer to it while coding!
